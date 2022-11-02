@@ -1,0 +1,47 @@
+﻿@attribute [Authorize(Roles = "user")]
+@using Microsoft.AspNetCore.Mvc;
+@using Microsoft.AspNetCore.Mvc.RazorPages;
+<h1>Add New Artist:</h1>
+<div class="col-md-6 col-sm-12 mx-auto mb-5">
+    <form>
+        <div class="mb-3 row">
+            <div class="col-sm-4 text-sm-end align-self-center">
+                <label class="form-label" asp-for="ArtistName"></label>
+            </div>
+            <div class="col">
+                <input type="text" @bind="@Title" @oninput="@((e) => { Title_=(string)e.Value;})">
+            </div>
+            <div class="col">
+                <input type="text" @bind="@Desc" @oninput="@((e) => { Desc=(string)e.Value;})">
+            </div>
+            <div class="col">
+                <input type="datetime-local" @bind="@Due_" @oninput="@((e) => { Due_=(DateTime)e.Value;})">
+            </div>
+        </div>
+        
+
+        <div class="row">
+            <div class="col-sm-4 text-sm-end align-self-center">
+            </div>
+            <div class="col-8">
+                <button type="submit" class="btn btn-outline-primary" @onclick="@(e => SubmitTask())">Add New Artist</button>
+            </div>
+        </div>
+    </form>
+</div>
+@code {
+    private readonly TestDbContext context;
+
+    public string Title_ { get; set; }
+    public string Desc { get; set; }
+    public DateTime Due_ { get; set; }
+
+    public void SubmitTask(){
+        context.Add<ToDoList>(new ToDoList { Title = Title_, Description = Desc, Due = Due_});
+    }
+
+    public ToDo(TestDbContext context)
+    {
+        this.context = context;
+    }
+}

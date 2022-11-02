@@ -1,5 +1,6 @@
 using BlazorApp1.Areas.Identity;
 using BlazorApp1.Data;
+using BlazorApp1.Services;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
@@ -22,6 +23,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options =>
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<TestDbContext>();
 builder.Services.AddRazorPages();
+builder.Services.AddScoped<Userservice>();
 builder.Services.AddServerSideBlazor();
 
 builder.Services.Configure<IdentityOptions>(options =>

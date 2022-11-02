@@ -10,5 +10,7 @@
         public DateTime? CompletetedOn { get; set; }
 
         public ICollection<ToDoList>? Sublist { get; set; }
+
+        public string Email { get; set; }
     }
 }
